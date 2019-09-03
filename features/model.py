@@ -9,3 +9,12 @@ def sigmoid(X, theta):
     Precondition: if X is (m x n), theta should be (n x i)
     '''
     return 1/(1+np.exp(-np.dot(X,theta)))
+
+def computeCost(X, theta, y):
+    '''
+    Returns the cost for a particular choice of theta.
+    '''
+    m = X.shape[0]
+    h = sigmoid(X, theta)
+    cost = (1/m)*np.sum(-y*np.log(h)-(1-y)*np.log(1-h))
+    return cost
