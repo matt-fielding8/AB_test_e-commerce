@@ -40,9 +40,13 @@ def gradientDescent(X, theta, y, alpha=0.1, iters=1000, track=False):
 def predict(X, theta, threshold=0.5):
     '''Returns absolute predictions for all entries in X'''
     predictions = sigmoid(X, theta)
-    return (predictions >= 0.5).astype(int)
+    return (predictions >= threshold).astype(int)
 
-def predictAccuray(predictions, y):
-    '''Returns prediction accuracy as percentage.
+def predictAccuracy(predictions, y, pcnt=True):
+    '''Returns prediction accuracy as percentage if pcnt==True, otherwise
+    returns proportion.
     Precondition: len(predictions) ==  len(y)'''
-    return "{:.2f}%".format(100*float((predictions == y).mean()))
+    if pcnt:
+        return "{:.2f}%".format(100*float((predictions == y).mean()))
+    else:
+        return (predictions == y).mean()
