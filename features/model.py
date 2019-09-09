@@ -77,3 +77,12 @@ def f1score(predictions, y):
     r = recall(predictions, y)
 
     return (2*p*r)/(p + r)
+
+def trueNegRate(predictions, y):
+    '''
+    Calculate true negative rate (specificity).
+    '''
+    true_neg = ((predictions == 0) & (y == 0)).sum()
+    false_neg = ((predictions == 0) & (y == 1)).sum()
+
+    return true_neg/(true_neg+false_neg)
