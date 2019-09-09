@@ -86,3 +86,12 @@ def trueNegRate(predictions, y):
     false_neg = ((predictions == 0) & (y == 1)).sum()
 
     return true_neg/(true_neg+false_neg)
+
+def falsePosRate(predictions, y):
+    '''
+    Calculate false positive rate.
+    '''
+    true_pos = ((predictions == 1) & (y == 1)).sum()
+    false_neg = ((predictions == 0) & (y == 1)).sum()
+
+    return true_neg/(true_neg+false_neg)
