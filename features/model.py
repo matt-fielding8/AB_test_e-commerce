@@ -95,3 +95,13 @@ def falsePosRate(predictions, y):
     false_neg = ((predictions == 0) & (y == 1)).sum()
 
     return true_neg/(true_neg+false_neg)
+
+def confMatrix(predictions, y):
+    '''Generates confusion matrix.
+    Predicted class columns, actual class rows'''
+    cnf = np.array([[((predictions == 0) & (y == 0)).sum(),
+                ((predictions == 1) & (y == 0)).sum()],
+                [((predictions == 0) & (y == 1)).sum(),
+                ((predictions == 1) & (y == 1)).sum()]])
+
+    return cnf
