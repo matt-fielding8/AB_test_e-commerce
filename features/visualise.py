@@ -47,6 +47,6 @@ def plotROC(X, y, theta, thresholds, **kwargs):
                 xlabel='False Positive Rate',
                 ylabel='True Positive Rate', **kwargs);
 
-    sb.regplot(x=fpr, y=tpr, scatter_kws={'alpha':0.5});
+    plt.plot(fpr,tpr);
     plt.xlim(0,1);
     plt.ylim(0,1);
