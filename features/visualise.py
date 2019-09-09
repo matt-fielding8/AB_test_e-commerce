@@ -3,6 +3,7 @@
 import matplotlib.pyplot as plt
 import seaborn as sb
 import typing
+import model as mod
 
 from typing import List
 
@@ -31,3 +32,21 @@ def createPlot(r: int=1, c: int=1, title: List=[""],
         plt.yticks(fontsize=tick_font);
 
     return axs
+
+def plotROC(X, y, theta, thresholds, **kwargs):
+    '''Plots the ROC (Received Operator Characterstic) curve'''
+    tpr, fpr = [], []
+    for t in thresholds:
+        predictions = mod.predict(X, theta, threshold=t)
+        cnf = mod.confMatrix(predictions, y)
+
+        tpr.append(cnf[1][1]/(cnf[1][1]+cnf[1][0]))
+        fpr.append(cnf[0][1]/(cnf[0][1]+cnf[0][0]))
+
+    createPlot(title=["Receiving Operator Characterstic Curve"],
+                xlabel='False Positive Rate',
+                ylabel='True Positive Rate', **kwargs);
+
+    sb.regplot(x=fpr, y=tpr, scatter_kws={'alpha':0.5});
+    plt.xlim(0,1);
+    plt.ylim(0,1);
